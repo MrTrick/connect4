@@ -1,18 +1,35 @@
 'use strict';
-const Board = require('./lib/board.js');
+//const Board = require('./lib/board.js');
+const State = require('./lib/state.js');
 
-let b = new Board(7,5);
+let s = new State();
+console.log(s.toString());
+console.log('can play', s.canPlay(4));
+s = s.play(4);
+console.log(s.toString());
+s = s.play(3);
+console.log(s.toString());
+s = s.play(5);
+s = s.play(1);
+s = s.play(7);
+s = s.play(3);
+s = s.play(3);
+console.log(s.toString());
+s = s.play(2).play(4).play(3).play(2).play(6);
+console.log(s.toString());
 
-console.log(b.freeSpaces(2));
-b.addPiece(2,1); 
-b.addPiece(2,2);
-b.addPiece(0,1);
-b.addPiece(3,2);
-b.addPiece(1,1);
+//let b = new Board(7,5);
+
+//console.log(b.freeSpaces(2));
+//b.addPiece(2,1); 
+//b.addPiece(2,2);
+//b.addPiece(0,1);
+//b.addPiece(3,2);
+//b.addPiece(1,1);
 
 
-console.log(b.toString());
-console.log(b.freeSpaces(2));
+//console.log(b.toString());
+//console.log(b.freeSpaces(2));
 
 /*var blessed = require('blessed');
 
