@@ -1,8 +1,51 @@
 'use strict';
-//const Board = require('./lib/board.js');
-const State = require('./lib/state.js');
 
-let s = new State();
+//Play...
+
+//1. Who is playing?
+//2. Start game, render.
+//3. Loop;
+//  - Get current player
+//  - Get player move
+//  - Move
+//  - If won, stop.
+//  - If draw, stop.
+//4. Show end state
+
+const State = require('./lib/state');
+const PlayerRando = require('./lib/player/rando');
+const Game = require('./lib/game.js');
+
+const state = new State();
+const player1 = new PlayerRando();
+const player2 = new PlayerRando();
+const game = new Game(state, player1, player2);
+
+player1.on('thinking', function(msg) {
+	process.stdout.write(msg);
+});
+player2.on('thinking', function(msg) {
+	process.stdout.write(msg);
+});
+
+function next() {
+	game.play().then((state)=>{
+		console.log(state.toString());
+		if (state.gameover) {
+			console.log("Game over");
+			console.log(state.winner?"Winner is Player "+state.winner:"Draw");
+		} else {
+			setImmediate(next);
+		}
+	})
+}
+setImmediate(next);
+
+
+//const Board = require('./lib/board.js');
+//
+
+/*let s = new State();
 console.log(s.toString());
 console.log('can play', s.canPlay(4));
 s = s.play(4);
@@ -16,7 +59,7 @@ s = s.play(3);
 s = s.play(3);
 console.log(s.toString());
 s = s.play(2).play(4).play(3).play(2).play(6);
-console.log(s.toString());
+console.log(s.toString());*/
 
 //let b = new Board(7,5);
 
