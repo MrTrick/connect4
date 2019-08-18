@@ -14,19 +14,19 @@
 
 const State = require('./lib/state');
 const PlayerRando = require('./lib/player/rando');
+const PlayerEddie = require('./lib/player/eddie');
 const Game = require('./lib/game.js');
 
 const state = new State();
 const player1 = new PlayerRando();
-const player2 = new PlayerRando();
+//const player2 = new PlayerRando();
+const player2 = new PlayerEddie();
 const game = new Game(state, player1, player2);
 
-player1.on('thinking', function(msg) {
-	process.stdout.write(msg);
-});
-player2.on('thinking', function(msg) {
-	process.stdout.write(msg);
-});
+player1.on('thinking', msg=>console.log('Player 1: '+msg));
+player1.on('highlight', cols=>console.log('(Player 1 highlighted '+JSON.stringify(cols)+')'));
+player2.on('thinking', msg=>console.log('Player 2: '+msg));
+player2.on('highlight', cols=>console.log('(Player 2 highlighted '+JSON.stringify(cols)+')'));
 
 function next() {
 	game.play().then((state)=>{

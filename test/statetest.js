@@ -1,6 +1,18 @@
+//Ensure that the State object behaves internally as expected
 var assert = require('assert').strict;
 var State = require('../lib/state');
 
+/**
+ * Helper to compare State object attributes to expected values
+ * @param {State} state 
+ * @param {Number[]} moves 
+ * @param {Number[][]} board 
+ * @param {boolean} gameover 
+ * @param {boolean} winner 
+ * @param {Number?} col 
+ * @param {Number?} row 
+ * @param {string?} msg 
+ */
 function assertState(state, moves, board, gameover, winner, col, row, msg) {
 	assert.deepStrictEqual(state.moves, moves, (msg||'')+'(moves)');
 	assert.deepStrictEqual(state.board, board, (msg||'')+'(board)');
@@ -34,7 +46,6 @@ describe('State', function() {
 			state.board.forEach(vert=>assert(Object.isFrozen(vert), "Columns in board are frozen"));
 		});
 		it('should create a child state if called with pos and previous state', function() {
-
 			const state1 = new State();
 			const state2 = new State(4, state1);
 			assert.notEqual(state1, state2);
