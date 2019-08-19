@@ -1,6 +1,7 @@
 //Ensure that the State object behaves internally as expected
-var assert = require('assert').strict;
-var State = require('../lib/state');
+'use strict';
+const assert = require('assert').strict;
+const State = require('../lib/state');
 
 /**
  * Helper to compare State object attributes to expected values
