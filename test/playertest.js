@@ -45,17 +45,17 @@ describe('Player (Implementations)',  function() {
 	playerEddie.phoneAFriend = mockAFriend;
 
 	const players = [
-		['PlayerHuman','Human', playerHuman],
-		['PlayerRando','Rando', playerRando],
-		['PlayerEddie','Eddie', playerEddie]
+		[PlayerHuman,'Human', playerHuman],
+		[PlayerRando,'Rando', playerRando],
+		[PlayerEddie,'Eddie', playerEddie]
 	];
-	players.forEach(function([className, name, player]) {
-		describe(className, function() {
+	players.forEach(function([playerClass, name, player]) {
+		describe(playerClass.name, function() {
 			it('should follow the Player specification', function() {
 				assert(player instanceof Player);
 				assert(typeof player.getPlay === 'function');
-				assert.strictEqual(player.name, name);
-				assert(typeof player.description === 'string');
+				assert.strictEqual(playerClass.name, name);
+				assert(typeof playerClass.description === 'string');
 			});
 
 			describe('#getPlay()', function() {
