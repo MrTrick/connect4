@@ -1,5 +1,7 @@
 //Test the Player class and its subclasses
 'use strict';
+/* jshint mocha: true */
+
 const assert = require('assert').strict;
 const EventEmitter = require('events');
 
@@ -66,7 +68,8 @@ describe('Player (Implementations)',  function() {
 				player.on('thinking', msg=>thoughts.push(msg));
 				player.on('highlight', highlight=>highlights.push(highlight));
 				beforeEach(function() {
-					thoughts = [], highlights = [];
+					thoughts = [];
+					highlights = [];
 				});
 				before(function() {
 					//Regularly press buttons in case human

@@ -1,5 +1,7 @@
 //Ensure that the State object behaves internally as expected
 'use strict';
+/* jshint mocha: true */
+
 const assert = require('assert').strict;
 const State = require('../lib/state');
 
@@ -19,8 +21,8 @@ function assertState(state, moves, board, gameover, winner, col, row, msg) {
 	assert.deepStrictEqual(state.board, board, (msg||'')+'(board)');
 	assert.strictEqual(state.gameover, gameover, (msg||'')+'(gameover)');
 	assert.strictEqual(state.winner, winner, (msg||'')+'(winner)');
-	col===undefined || assert.strictEqual(state.col, col, (msg||'')+'(col)');
-	row===undefined || assert.strictEqual(state.row, row, (msg||'')+'(row)');
+	if(col!==undefined) assert.strictEqual(state.col, col, (msg||'')+'(col)');
+	if(row!==undefined) assert.strictEqual(state.row, row, (msg||'')+'(row)');
 }
 
 describe('State', function() {
@@ -105,8 +107,8 @@ describe('State', function() {
 				],
 				false, false, 4, 5
 			);
-		})
-	})
+		});
+	});
 
 	describe('#validPlay()', function() {
 		it('should require a valid positional argument', function() {
@@ -146,7 +148,7 @@ describe('State', function() {
 			//Make a mock state with some columns full
 			const state2 = State.parse('244444666666777777333555555');
 			assert.deepStrictEqual(state2.validPlays().sort(), [1,2,3,4]);
-		})
+		});
 	});
 
 	describe('#nextPiece()', function() {
@@ -204,7 +206,7 @@ describe('State', function() {
 			const state3 = State.parse('123456723456776543271165432112345676725431');
 			assert.strictEqual(state3.gameover, true);
 			assert.strictEqual(state3.winner, false);
-		})
+		});
 	});
 
 	describe('#_won()', function() {
