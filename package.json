@@ -1,0 +1,26 @@
+{
+  "name": "connect4",
+  "version": "1.0.0",
+  "description": "Text-mode Connect4 Game",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+	"test": "jshint --exclude ./node_modules . && mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "terminal-kit": "^1.31.1"
+  },
+  "devDependencies": {
+    "jshint": "^2.10.2",
+    "mocha": "^6.2.0"
+  },
+  "jshintConfig": {
+	"strict": true,
+	"node": true,
+	"esversion": 8
+  }
+}
