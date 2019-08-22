@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "Text-mode Connect4 Game",
   "main": "index.js",
+  "repository": "https://github.com/MrTrick/connect4",
   "scripts": {
     "start": "node index.js",
     "test": "jshint --exclude ./node_modules . && mocha"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "MrTrick",
+  "license": "MIT",
   "dependencies": {
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
