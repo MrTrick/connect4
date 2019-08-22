@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-	"test": "jshint --exclude ./node_modules . && mocha"
+    "test": "jshint --exclude ./node_modules . && mocha"
   },
   "author": "",
   "license": "ISC",
@@ -19,8 +19,8 @@
     "mocha": "^6.2.0"
   },
   "jshintConfig": {
-	"strict": true,
-	"node": true,
-	"esversion": 8
+    "strict": true,
+    "node": true,
+    "esversion": 8
   }
 }
