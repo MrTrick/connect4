@@ -20,7 +20,12 @@
     "mocha": "^6.2.0"
   },
   "jshintConfig": {
-    "strict": true,
+	"strict": true,
+	"eqeqeq": true,
+	"unused": true,
+	"undef": true,
+	"varstmt": true,
+	"latedef": true,
     "node": true,
     "esversion": 8
   }
