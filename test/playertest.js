@@ -7,9 +7,11 @@ const EventEmitter = require('events');
 
 const State = require('../lib/state');
 const Player = require('../lib/player');
-const PlayerRando = require('../lib/player/rando');
-const PlayerEddie = require('../lib/player/eddie');
 const PlayerHuman = require('../lib/player/human');
+const PlayerRando = require('../lib/player/rando');
+const PlayerHugh = require('../lib/player/hugh');
+const PlayerEddie = require('../lib/player/eddie');
+
 
 describe('Player (Parent Class)', function() {
 	const player = new Player();
@@ -43,12 +45,14 @@ describe('Player (Implementations)',  function() {
 
 	const playerHuman = new PlayerHuman(mockTerm);
 	const playerRando = new PlayerRando();
+	const playerHugh = new PlayerHugh();
 	const playerEddie = new PlayerEddie();
 	playerEddie.phoneAFriend = mockAFriend;
 
 	const players = [
 		[PlayerHuman,'Human', playerHuman],
 		[PlayerRando,'Rando', playerRando],
+		[PlayerHugh,'Hugh', playerHugh],
 		[PlayerEddie,'Eddie', playerEddie]
 	];
 	players.forEach(function([playerClass, name, player]) {
@@ -109,5 +113,38 @@ describe('Player (Implementations)',  function() {
 				});
 			});
 		});
+	});
+});
+
+describe('Player (Hugh)', function() {
+	const playerHugh = new PlayerHugh();
+	it('should recognise a winning move', function() {
+		const state1 = State.parse('1624351');
+		assert.deepStrictEqual(playerHugh.getWinningPlays(state1), [7]);
+		
+		const state2 = State.parse('1314751');
+		assert.deepStrictEqual(playerHugh.getWinningPlays(state2), [2,6]);
+
+		const state3 = State.parse('1223');
+		assert.deepStrictEqual(playerHugh.getWinningPlays(state3), []);
+	});
+	
+	it('should recognise if an opponent could win in the next turn', function() {
+		const state1 = State.parse('14131');
+		assert.deepStrictEqual(playerHugh.getSafePlays(state1), [1], 'Opponent has three in a vertical, must block to prevent win.');
+
+		const state2 = State.parse('2334454');
+		assert.deepStrictEqual(playerHugh.getSafePlays(state2), [1,2,3,4,5,6,7], 'Anywhere is safe (though 6 is actually a winning play)');
+
+		const state3 = State.parse('3234462');
+		assert.deepStrictEqual(playerHugh.getSafePlays(state3), [2,3,4,6,7], 'Opponent has three horizontal, but can\'t put pieces there - yet');
+	});
+
+	it('should score positions as expected', function() {
+		const state1 = State.parse('4');
+		assert.deepStrictEqual([1,2,3,4,5,6,7].map(p=>playerHugh.scorePlay(state1, p)), [4,7,6,6,6,7,4]);
+
+		const state2 = State.parse('424');
+		assert.deepStrictEqual([1,2,3,4,5,6,7].map(p=>playerHugh.scorePlay(state2, p)), [5,8,6,6,5,7,4]);
 	});
 });

@@ -9,6 +9,7 @@ const View = require('./lib/view');
 const players = {
 	human: require('./lib/player/human'),
 	rando: require('./lib/player/rando'),
+	hugh: require('./lib/player/hugh'),
 	eddie: require('./lib/player/eddie')
 };
 
