@@ -238,6 +238,16 @@ describe('State', function() {
 			const stateDiagB = State.parse('345436344365');
 			assert.strictEqual(stateDiagB._won(4, 1, 2), true, 'Player 2 wins with a back diagonal');
 		});
+		it('should return false for not-winning cases', function() {
+			const stateMissingMiddle = State.parse('61212226553');
+			assert.strictEqual(stateMissingMiddle._won(2, 0, 1), false, 'oo-oo, not four in a row');
+			
+			const stateInThrees = State.parse('1224444557');
+			assert.strictEqual(stateInThrees._won(6, 0, 2), false, 'o-oo-o, not four in a row');
+
+			const stateMissingMiddleDiag = State.parse('1224444455555');
+			assert.strictEqual(stateMissingMiddleDiag._won(4, 4, 2), false, 'oo-oo diagonally, not four in a row');
+		});
 		it('should be used by the constructor to set the gameover/winner flags', function() {
 			const stateVert = State.parse('436767656'); //Player 1 wins vertically in column 5
 			const stateHorz = State.parse('4152637'); //Player 1 wins horizontally in row 0
